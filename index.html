@@ -3,962 +3,708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFlow | Visual Development Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Street Photography — The Art of Everyday Moments</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-tertiary: #515154;
+            --bg-white: #ffffff;
+            --bg-gray: #f5f5f7;
+            --accent-blue: #0071e3;
+            --accent-blue-hover: #0077ed;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9fbfd;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
         }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
-        
+
+        /* Navigation */
         nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            z-index: 1000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-icon {
-            color: #4361ee;
-            font-size: 28px;
-            margin-right: 10px;
-        }
-        
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-        }
-        
-        .logo-text span {
-            color: #4361ee;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
+
+        nav a {
+            color: var(--text-primary);
             text-decoration: none;
-            color: #555;
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s;
+            padding: 0 20px;
+            transition: color 0.3s ease;
         }
-        
-        .nav-links a:hover {
-            color: #4361ee;
+
+        nav a:hover {
+            color: var(--accent-blue);
         }
-        
-        .cta-button {
-            background-color: #4361ee;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        
-        .cta-button:hover {
-            background-color: #3a56d4;
-            transform: translateY(-2px);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #333;
-            cursor: pointer;
-        }
-        
+
         /* Hero Section */
         .hero {
-            padding: 150px 0 100px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #f9fbfd 100%);
-        }
-        
-        .hero-content {
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-gray) 100%);
         }
-        
-        .hero-text {
-            flex: 1;
-            padding-right: 40px;
+
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 96px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #222;
-        }
-        
-        .hero-text h1 span {
-            color: #4361ee;
-        }
-        
-        .hero-text p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .secondary-button {
-            background-color: white;
-            color: #4361ee;
-            border: 2px solid #4361ee;
-            padding: 12px 28px;
-            border-radius: 6px;
+
+        .hero .tagline {
+            font-size: clamp(21px, 4vw, 32px);
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
-        
-        .secondary-button:hover {
-            background-color: #f0f4ff;
+
+        .hero .subtitle {
+            font-size: clamp(17px, 2.5vw, 21px);
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.6;
         }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-blue);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
+
+        .cta-button:hover {
+            background: var(--accent-blue-hover);
+            transform: scale(1.02);
         }
-        
-        /* Features Section */
+
+        .cta-button::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 24px;
+        }
+
         .section-title {
+            font-size: clamp(40px, 7vw, 64px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 16px;
         }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: #222;
-            margin-bottom: 15px;
+
+        .section-subtitle {
+            font-size: clamp(19px, 2.5vw, 24px);
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+            font-weight: 400;
         }
-        
-        .section-title p {
-            color: #666;
-            max-width: 700px;
+
+        /* Definition Section */
+        .definition {
+            background: var(--bg-gray);
+        }
+
+        .definition-card {
+            max-width: 980px;
             margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.06);
         }
-        
+
+        .definition-card p {
+            font-size: 21px;
+            line-height: 1.7;
+            color: var(--text-tertiary);
+            margin-bottom: 24px;
+        }
+
+        .definition-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* Features Grid */
         .features {
-            padding: 100px 0;
-            background-color: white;
+            background: var(--bg-white);
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            background-color: #eef2ff;
-            color: #4361ee;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            color: #666;
-        }
-        
-        /* Benefits Section */
-        .benefits {
-            padding: 100px 0;
-            background-color: #f0f4ff;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-item {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .benefit-icon {
-            color: #4361ee;
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-item h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-item p {
-            color: #666;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
+            gap: 24px;
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
         }
-        
-        .testimonial {
-            background: #f9fbfd;
-            padding: 40px;
-            border-radius: 10px;
+
+        .feature-card {
+            background: var(--bg-gray);
+            border-radius: 24px;
+            padding: 48px 36px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
         }
-        
-        .testimonial-text {
-            font-size: 18px;
-            font-style: italic;
-            margin-bottom: 30px;
-            color: #555;
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .feature-icon {
+            font-size: 56px;
+            margin-bottom: 24px;
+            display: block;
         }
-        
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #ddd;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #4361ee;
+
+        .feature-card h3 {
             font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
         }
-        
-        .author-info h4 {
-            font-size: 18px;
-            margin-bottom: 5px;
+
+        .feature-card p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
-        
-        .author-info p {
-            color: #777;
-            font-size: 14px;
+
+        /* Masters Section */
+        .masters {
+            background: var(--text-primary);
+            color: white;
         }
-        
-        /* Pricing Section */
-        .pricing {
-            padding: 100px 0;
-            background-color: #f9fbfd;
+
+        .masters .section-title {
+            color: white;
         }
-        
-        .pricing-grid {
+
+        .masters .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .masters-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 10px;
-            padding: 40px 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .pricing-card.featured {
-            border-top: 5px solid #4361ee;
-            transform: scale(1.05);
-            position: relative;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #4361ee;
-            color: white;
-            padding: 5px 20px;
+
+        .master-card {
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
+
+        .master-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
         }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        
-        .plan-name {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .plan-price {
-            font-size: 48px;
+
+        .master-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
             font-weight: 700;
-            color: #4361ee;
-            margin-bottom: 20px;
         }
-        
-        .plan-price span {
-            font-size: 16px;
-            color: #777;
+
+        .master-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
-        
-        .plan-features {
-            list-style: none;
-            margin-bottom: 30px;
+
+        .master-card .years {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
         }
-        
-        .plan-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
+
+        .master-card p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
         }
-        
-        .plan-features li:last-child {
+
+        /* Tips Section */
+        .tips {
+            background: var(--bg-gray);
+        }
+
+        .tips-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .tip-item:last-child {
             border-bottom: none;
         }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+
+        .tip-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            line-height: 1;
+            min-width: 60px;
+        }
+
+        .tip-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .tip-content p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(180deg, var(--bg-gray) 0%, var(--bg-white) 100%);
+            padding: 160px 24px;
             text-align: center;
-            color: white;
         }
-        
-        .cta-section h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+
+        .quote {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 600;
+            max-width: 900px;
+            margin: 0 auto 32px;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
         }
-        
-        .cta-section p {
+
+        .quote-author {
             font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
-        
-        .cta-section .cta-button {
-            background-color: white;
-            color: #4361ee;
-            font-size: 16px;
-            padding: 15px 40px;
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--bg-white);
+            padding: 120px 24px;
         }
-        
-        .cta-section .cta-button:hover {
-            background-color: #f0f4ff;
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .gallery-item:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .gallery-item:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .gallery-item:nth-child(5) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .gallery-item:nth-child(6) {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item span {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
         /* Footer */
         footer {
-            background-color: #222;
-            color: #ccc;
-            padding: 70px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-column h3 {
-            font-size: 20px;
-            color: white;
-            margin-bottom: 25px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: #4361ee;
-        }
-        
-        .copyright {
+            background: var(--bg-gray);
+            padding: 60px 24px;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        footer p {
             font-size: 14px;
-            color: #888;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
+
+        footer .copyright {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
             }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 50px;
-                text-align: center;
-            }
-            
-            .hero-text p {
-                margin: 0 auto 30px;
-            }
-            
-            .pricing-card.featured {
-                transform: none;
-            }
-            
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            nav a {
+                padding: 0 12px;
+                font-size: 12px;
             }
-            
-            .mobile-menu-btn {
-                display: block;
+
+            section {
+                padding: 80px 20px;
             }
-            
-            .hero-text h1 {
-                font-size: 36px;
+
+            .definition-card {
+                padding: 40px 24px;
             }
-            
-            .section-title h2 {
-                font-size: 30px;
+
+            .definition-card p {
+                font-size: 18px;
             }
-            
-            .hero-buttons {
+
+            .tip-item {
                 flex-direction: column;
-                align-items: center;
+                gap: 16px;
             }
-            
-            .hero-buttons button {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero {
-                padding: 130px 0 80px;
-            }
-            
-            .features, .benefits, .testimonials, .pricing, .cta-section {
-                padding: 70px 0;
-            }
-            
-            .feature-card, .testimonial {
-                padding: 25px;
-            }
-            
-            .plan-price {
+
+            .tip-number {
                 font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <div class="logo-icon"><i class="fas fa-bezier-curve"></i></div>
-                    <div class="logo-text">Code<span>Flow</span></div>
-                </div>
-                
-                <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#benefits">Benefits</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#">Resources</a></li>
-                </ul>
-                
-                <button class="cta-button">Start Free Trial</button>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </nav>
-        </div>
-    </header>
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#definition">What is Street</a>
+        <a href="#features">Elements</a>
+        <a href="#masters">Masters</a>
+        <a href="#tips">Tips</a>
+        <a href="#gallery">Gallery</a>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Build Apps Faster With <span>Visual Development</span></h1>
-                    <p>CodeFlow empowers teams to create enterprise-grade applications with minimal coding. Drag, drop, and connect components to build powerful web and mobile apps in record time.</p>
-                    <div class="hero-buttons">
-                        <button class="cta-button">Start Building Free</button>
-                        <button class="secondary-button">Watch Demo</button>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CodeFlow Platform Interface">
-                </div>
-            </div>
+    <section class="hero" id="home">
+        <h1>Street Photography</h1>
+        <p class="tagline">The Art of Everyday Moments</p>
+        <p class="subtitle">Discover the extraordinary in the ordinary. Street photography captures the raw essence of human life — spontaneous, authentic, and eternally fleeting.</p>
+        <a href="#definition" class="cta-button">Explore</a>
+    </section>
+
+    <!-- Definition Section -->
+    <section class="definition" id="definition">
+        <h2 class="section-title">What is Street Photography?</h2>
+        <p class="section-subtitle">A window into the soul of humanity</p>
+        <div class="definition-card">
+            <p><span class="highlight">Street photography</span> is a genre of photography that records everyday life in public spaces. It's not merely about capturing streets — it's about documenting the human condition, the decisive moments that tell stories without words.</p>
+            <p>Unlike other genres that rely on careful staging, street photography thrives on <span class="highlight">spontaneity and authenticity</span>. The photographer becomes an invisible observer, capturing life as it unfolds naturally — a fleeting expression, an unexpected juxtaposition, a play of light and shadow.</p>
+            <p>At its core, street photography is about <span class="highlight">seeing</span> — training your eye to find poetry in the mundane, drama in the everyday, and beauty in imperfection. It's perhaps the most honest form of visual storytelling.</p>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Powerful Features for Rapid Development</h2>
-                <p>CodeFlow provides all the tools you need to build, deploy, and scale applications without writing extensive code.</p>
+        <h2 class="section-title">Essential Elements</h2>
+        <p class="section-subtitle">The building blocks that transform a snapshot into a story</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">👁️</span>
+                <h3>The Decisive Moment</h3>
+                <p>Henri Cartier-Bresson's famous concept — the split second when form and meaning align perfectly, creating a composition that can never be replicated.</p>
             </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                    <h3>Visual Builder</h3>
-                    <p>Drag and drop UI components to design responsive interfaces. Connect data sources with simple point-and-click actions.</p>
+            <div class="feature-card">
+                <span class="feature-icon">🎭</span>
+                <h3>Human Emotion</h3>
+                <p>The raw, unfiltered expressions of joy, sorrow, surprise, and contemplation that connect us all. Street photography captures emotions in their most genuine form.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎭</span>
+                <h3>Light & Shadow</h3>
+                <p>The interplay of light creates drama, mood, and depth. Masters use natural light as their paintbrush, turning ordinary scenes into visual poetry.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🏙️</span>
+                <h3>Urban Landscape</h3>
+                <p>Architecture, streets, and public spaces serve as the stage. The environment tells stories of culture, time, and the rhythm of city life.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3>Juxtaposition</h3>
+                <p>The art of placing contrasting elements side by side — old and new, rich and poor, chaos and calm — creating visual tension and narrative depth.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⏳</span>
+                <h3>Time & Memory</h3>
+                <p>Street photographs become historical documents, preserving fleeting moments that would otherwise be lost forever. They are windows to the past.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masters Section -->
+    <section class="masters" id="masters">
+        <h2 class="section-title">Legendary Masters</h2>
+        <p class="section-subtitle">The visionaries who shaped the art form</p>
+        <div class="masters-grid">
+            <div class="master-card">
+                <div class="master-avatar">HC</div>
+                <h3>Henri Cartier-Bresson</h3>
+                <p class="years">1908 – 2004</p>
+                <p>Father of modern street photography and pioneer of the "decisive moment." His work defined the genre's artistic potential.</p>
+            </div>
+            <div class="master-card">
+                <div class="master-avatar">VF</div>
+                <h3>Vivian Maier</h3>
+                <p class="years">1926 – 2009</p>
+                <p>A mysterious nanny who secretly captured over 150,000 photographs. Her posthumous discovery revolutionized our understanding of street photography.</p>
+            </div>
+            <div class="master-card">
+                <div class="master-avatar">RF</div>
+                <h3>Robert Frank</h3>
+                <p class="years">1924 – 2019</p>
+                <p>His seminal work "The Americans" broke all conventions, showing a raw, poetic vision of post-war America that changed photography forever.</p>
+            </div>
+            <div class="master-card">
+                <div class="master-avatar">SA</div>
+                <h3>Saul Leiter</h3>
+                <p class="years">1923 – 2013</p>
+                <p>A pioneer of color street photography who found beauty in reflections, rain, and the quiet poetry of urban life.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips" id="tips">
+        <h2 class="section-title">Getting Started</h2>
+        <p class="section-subtitle">Practical advice for aspiring street photographers</p>
+        <div class="tips-container">
+            <div class="tip-item">
+                <span class="tip-number">01</span>
+                <div class="tip-content">
+                    <h3>Master Your Camera</h3>
+                    <p>Know your equipment so well that operating it becomes muscle memory. In street photography, decisive moments wait for no one. Practice adjusting settings without looking.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Database Integration</h3>
-                    <p>Connect to any data source with built-in connectors. Automatically generate CRUD operations without writing SQL.</p>
+            </div>
+            <div class="tip-item">
+                <span class="tip-number">02</span>
+                <div class="tip-content">
+                    <h3>Stay Invisible</h3>
+                    <p>The best street photographs capture natural behavior. Blend into your environment, move slowly, and avoid drawing attention. Smaller cameras often work better.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Cross-Platform</h3>
-                    <p>Build once, deploy everywhere. Generate applications for web, iOS, and Android from a single visual design.</p>
+            </div>
+            <div class="tip-item">
+                <span class="tip-number">03</span>
+                <div class="tip-content">
+                    <h3>Find Good Light</h3>
+                    <p>Learn to see light. Early morning and late afternoon offer the most dramatic shadows. Overcast days provide soft, even lighting perfect for portraits.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Extensible with Code</h3>
-                    <p>Add custom functionality with JavaScript when needed. Our platform doesn't limit your creativity or complexity.</p>
+            </div>
+            <div class="tip-item">
+                <span class="tip-number">04</span>
+                <div class="tip-content">
+                    <h3>Be Patient</h3>
+                    <p>Great street photographs often require waiting. Find an interesting background or lighting, then wait for the right subject to enter the frame.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Built-in authentication, authorization, and data encryption. SOC2 compliant with enterprise-grade security features.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>One-Click Deployment</h3>
-                    <p>Deploy to cloud or on-premises with a single click. Automatic scaling and monitoring included.</p>
+            </div>
+            <div class="tip-item">
+                <span class="tip-number">05</span>
+                <div class="tip-content">
+                    <h3>Shoot Constantly</h3>
+                    <p>Street photography is a practice. The more you shoot, the better you become at anticipating moments. Don't wait for perfect conditions — create your own.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose CodeFlow?</h2>
-                <p>Join thousands of companies accelerating their digital transformation with low-code development.</p>
-            </div>
-            
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>10x Faster Development</h3>
-                    <p>Build applications in days instead of months with visual development tools.</p>
-                </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h3>Reduce Costs by 70%</h3>
-                    <p>Lower development and maintenance costs with fewer resources required.</p>
-                </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Citizen Developers</h3>
-                    <p>Enable business users to build solutions with minimal IT assistance.</p>
-                </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Scale Effortlessly</h3>
-                    <p>From prototype to enterprise-scale applications with the same platform.</p>
-                </div>
-            </div>
-        </div>
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <p class="quote">"Photography is an immediate reaction, drawing is a meditation."</p>
+        <p class="quote-author">— Henri Cartier-Bresson</p>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Trusted by Industry Leaders</h2>
-                <p>See what our customers have to say about their experience with CodeFlow.</p>
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Visual Stories</h2>
+        <p class="section-subtitle">Every frame tells a thousand words</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <span>Urban Solitude</span>
             </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "CodeFlow transformed how we deliver solutions to our business units. What used to take 6 months now takes 3 weeks. Our development team can focus on complex problems while business teams build their own solutions."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SC</div>
-                        <div class="author-info">
-                            <h4>Sarah Chen</h4>
-                            <p>CTO, TechGrowth Inc.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="gallery-item">
+                <span>Morning Light</span>
             </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-title">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Choose the plan that fits your needs. All plans include core features with no hidden fees.</p>
+            <div class="gallery-item">
+                <span>City Rhythm</span>
             </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Starter</h3>
-                    <div class="plan-price">$29<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>Up to 5 users</li>
-                        <li>10 GB storage</li>
-                        <li>Basic components</li>
-                        <li>Community support</li>
-                        <li>1 production app</li>
-                    </ul>
-                    <button class="secondary-button">Get Started</button>
-                </div>
-                
-                <div class="pricing-card featured">
-                    <div class="featured-badge">Most Popular</div>
-                    <h3 class="plan-name">Professional</h3>
-                    <div class="plan-price">$89<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>Up to 25 users</li>
-                        <li>100 GB storage</li>
-                        <li>All components</li>
-                        <li>Priority support</li>
-                        <li>10 production apps</li>
-                        <li>Custom branding</li>
-                    </ul>
-                    <button class="cta-button">Try Free for 14 Days</button>
-                </div>
-                
-                <div class="pricing-card">
-                    <h3 class="plan-name">Enterprise</h3>
-                    <div class="plan-price">Custom</div>
-                    <ul class="plan-features">
-                        <li>Unlimited users</li>
-                        <li>Unlimited storage</li>
-                        <li>All features included</li>
-                        <li>24/7 dedicated support</li>
-                        <li>Unlimited apps</li>
-                        <li>On-premises option</li>
-                    </ul>
-                    <button class="secondary-button">Contact Sales</button>
-                </div>
+            <div class="gallery-item">
+                <span>Reflections</span>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Start Building Today</h2>
-            <p>Join over 10,000 companies that use CodeFlow to accelerate their application development. No credit card required for the free trial.</p>
-            <button class="cta-button">Get Started for Free</button>
+            <div class="gallery-item">
+                <span>Street Life</span>
+            </div>
+            <div class="gallery-item">
+                <span>Silent Moments</span>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="logo">
-                        <div class="logo-icon"><i class="fas fa-bezier-curve"></i></div>
-                        <div class="logo-text">Code<span>Flow</span></div>
-                    </div>
-                    <p style="margin-top: 20px; color: #aaa;">The leading visual development platform for building enterprise applications with minimal coding.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Use Cases</a></li>
-                        <li><a href="#">Integrations</a></li>
-                        <li><a href="#">Roadmap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Support</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 CodeFlow. All rights reserved.</p>
-            </div>
-        </div>
+        <p>Street Photography — Capturing the Poetry of Everyday Life</p>
+        <p class="copyright">© 2026 All rights reserved. Made with passion for the art of seeing.</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            
-            // Adjust for mobile
-            if (window.innerWidth <= 768) {
-                if (navLinks.style.display === 'flex') {
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '80px';
-                    navLinks.style.left = '0';
-                    navLinks.style.width = '100%';
-                    navLinks.style.backgroundColor = 'white';
-                    navLinks.style.padding = '20px';
-                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                    
-                    const navItems = document.querySelectorAll('.nav-links li');
-                    navItems.forEach(item => {
-                        item.style.margin = '10px 0';
-                    });
+        // Smooth reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
-            }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .master-card, .tip-item, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
-                    
-                    // Close mobile menu if open
-                    if(window.innerWidth <= 768) {
-                        document.querySelector('.nav-links').style.display = 'none';
-                    }
                 }
-            });
-        });
-        
-        // Simple testimonial slider
-        const testimonials = [
-            {
-                text: "CodeFlow transformed how we deliver solutions to our business units. What used to take 6 months now takes 3 weeks. Our development team can focus on complex problems while business teams build their own solutions.",
-                name: "Sarah Chen",
-                position: "CTO, TechGrowth Inc.",
-                initials: "SC"
-            },
-            {
-                text: "We reduced our app development time by 80% using CodeFlow. The visual interface made it easy for our analysts to build data dashboards without waiting for IT resources.",
-                name: "Marcus Johnson",
-                position: "Director of Operations, DataCorp",
-                initials: "MJ"
-            },
-            {
-                text: "As a non-technical founder, CodeFlow allowed me to build our MVP in just 2 months. I could test ideas quickly and iterate based on user feedback without deep coding knowledge.",
-                name: "Lisa Wang",
-                position: "Founder, StartupLabs",
-                initials: "LW"
-            }
-        ];
-        
-        let currentTestimonial = 0;
-        const testimonialElement = document.querySelector('.testimonial');
-        
-        function rotateTestimonial() {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            updateTestimonial();
-        }
-        
-        function updateTestimonial() {
-            const testimonial = testimonials[currentTestimonial];
-            testimonialElement.innerHTML = `
-                <div class="testimonial-text">"${testimonial.text}"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">${testimonial.initials}</div>
-                    <div class="author-info">
-                        <h4>${testimonial.name}</h4>
-                        <p>${testimonial.position}</p>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Auto-rotate testimonials every 5 seconds
-        setInterval(rotateTestimonial, 5000);
-        
-        // CTA button interactions
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('Thank you for your interest in CodeFlow! You would be redirected to the signup page in a real implementation.');
-            });
-        });
-        
-        // Pricing card interactions
-        document.querySelectorAll('.pricing-card button').forEach(button => {
-            button.addEventListener('click', function() {
-                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
-                alert(`You selected the ${planName} plan. In a real implementation, you would be redirected to the checkout process.`);
             });
         });
     </script>
